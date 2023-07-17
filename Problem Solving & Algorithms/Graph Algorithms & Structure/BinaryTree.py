@@ -5,6 +5,9 @@
 #leaf node
 #internal node
 #these were part of a tree
+from collections import deque
+
+
 class BinaryTreeNode :
     def __init__(self ,value):
         self.value =  value
@@ -27,6 +30,39 @@ class BinaryTreeNode :
         print( self.value),
         if self.rightChild:
             self.rightChild.PrintTree()
+    
+    def dfs_traversal(self, order='in-order'):
+        if order == 'in-order':
+            if self.leftChild:
+                self.leftChild.dfs_traversal()
+            print(self.value, end=' ')
+            if self.rightChild:
+                self.rightChild.dfs_traversal()
+        elif order == 'pre-order':
+            print(self.value, end=' ')
+            if self.leftChild:
+                self.leftChild.dfs_traversal()
+            if self.rightChild:
+                self.rightChild.dfs_traversal()
+        elif order == 'post-order':
+            if self.leftChild:
+                self.leftChild.dfs_traversal()
+            if self.rightChild:
+                self.rightChild.dfs_traversal()
+            print(self.value, end=' ')
+            
+    def bfs_traversal(self):
+        queue = deque()
+        queue.append(self)
+
+        while queue:
+            node = queue.popleft()
+            print(node.value, end=' ')
+
+            if node.leftChild:
+                queue.append(node.leftChild)
+            if node.rightChild:
+                queue.append(node.rightChild)
                 
                 
 node1 = BinaryTreeNode(100) #creating an object with calling that class with its constructor
@@ -49,3 +85,10 @@ node3.rightChild = node7
 print(node1.value)#100 (root node)
 print("right Child Of Node 3 Is : "+str(node3.rightChild.value)) #right Child Of Node 3 Is : 45
 node1.PrintTree() ## left -> root -> right
+node1.dfs_traversal()
+print()
+node1.dfs_traversal('pre-order') #12 50 121 100 1000 75 45
+print() #100 12 50 121 1000 75 45
+node1.dfs_traversal('post-order') #12 50 121 1000 75 45 100
+print()
+node1.bfs_traversal()
