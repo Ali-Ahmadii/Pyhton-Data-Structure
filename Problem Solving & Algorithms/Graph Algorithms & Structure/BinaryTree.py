@@ -91,4 +91,4 @@ node1.dfs_traversal('pre-order') #12 50 121 100 1000 75 45
 print() #100 12 50 121 1000 75 45
 node1.dfs_traversal('post-order') #12 50 121 1000 75 45 100
 print()
-node1.bfs_traversal()
+node1.bfs_traversal() #100 50 75 12 121 1000 4
